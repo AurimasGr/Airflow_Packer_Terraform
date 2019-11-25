@@ -24,11 +24,11 @@
         },
         {
             "type": "shell",
-            "script": "./scripts/worker/init_airflow.sh"
+            "script": "./scripts/worker/mysql.sh"
         },
         {
             "type": "shell",
-            "script": "./scripts/worker/mysql.sh"
+            "script": "./scripts/worker/init_airflow.sh"
         },
         {
             "type": "file",
