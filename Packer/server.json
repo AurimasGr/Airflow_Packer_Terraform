@@ -37,25 +37,25 @@
         {
             "type": "file",
             "source": "./files/server/airflowserver.conf",
-            "destination": "/home/ubuntu/tmp_supervisor/"
+            "destination": "/home/ubuntu/"
         },
         {
             "type": "file",
             "source": "./files/server/airflowscheduler.conf",
-            "destination": "/home/ubuntu/tmp_supervisor/"
+            "destination": "/home/ubuntu/"
         },
         {
             "type": "file",
             "source": "./files/server/airflowflower.conf",
-            "destination": "/home/ubuntu/tmp_supervisor/"
+            "destination": "/home/ubuntu/"
         },
         {
             "type": "shell",
             "inline":[
-                "sudo mv /home/ubuntu/tmp_supervisor/airflowserver.conf /etc/supervisor/conf.d/airflowserver.conf",
-                "sudo mv /home/ubuntu/tmp_supervisor/airflowscheduler.conf /etc/supervisor/conf.d/airflowscheduler.conf",
-                "sudo mv /home/ubuntu/tmp_supervisor/airflowflower.conf /etc/supervisor/conf.d/airflowflower.conf",
-                "sudo rm /home/ubuntu/tmp_supervisor/",
+                "sudo mv /home/ubuntu/airflowserver.conf /etc/supervisor/conf.d/airflowserver.conf",
+                "sudo mv /home/ubuntu/airflowscheduler.conf /etc/supervisor/conf.d/airflowscheduler.conf",
+                "sudo mv /home/ubuntu/airflowflower.conf /etc/supervisor/conf.d/airflowflower.conf",
+                "sudo mkdir /var/log/airflow",
                 "sudo supervisorctl reread",
                 "sudo supervisorctl update"
             ]
