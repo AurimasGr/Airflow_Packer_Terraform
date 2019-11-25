@@ -33,11 +33,13 @@
         {
             "type": "file",
             "source": "./files/worker/airflowworker.conf",
-            "destination": "/etc/supervisor/conf.d/"
+            "destination": "/home/ubuntu/tmp_supervisor/"
         },
         {
             "type": "shell",
             "inline":[
+                "sudo mv /home/ubuntu/tmp_supervisor/airflowworker.conf /etc/supervisor/conf.d/airflowworker.conf",
+                "sudo rm /home/ubuntu/tmp_supervisor/",
                 "sudo supervisorctl reread",
                 "sudo supervisorctl update"
             ]
