@@ -12,7 +12,7 @@ sudo mysql -e "GRANT ALL ON ${AIRFLOW_DB}.* TO '${AIRFLOW_USER}'@'%' IDENTIFIED 
 sudo mysql -e "FLUSH PRIVILEGES;"
 
 # Allow external connections
-sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Restart mysql to enable new configs
 sudo service mysql stop
