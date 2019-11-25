@@ -1,0 +1,51 @@
+{
+    "variables": {
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+        "region":         "eu-central-1",
+        "ami_extension":  "my-custom-extension"
+    },
+    "builders": [
+        {
+            "access_key": "{{user `aws_access_key`}}",
+            "ami_name": "airflow-server-packer-{{user `ami_extension`}}",
+            "instance_type": "t2.micro",
+            "region": "{{user `region`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "source_ami": "ami-0cc0a36f626a4fdf5",
+            "ssh_username": "ubuntu",
+            "type": "amazon-ebs"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline":[
+                "ls -al /home/ubuntu",
+                "cat /home/ubuntu/welcome.txt"
+            ]
+        },
+        {
+            "type": "shell",
+            "script": "./scripts/common/init.sh"
+        },
+        {
+            "type": "shell",
+            "script": "./scripts/worker/mysql.sh"
+        },
+        {
+            "type": "shell",
+            "script": "./scripts/common/init_airflow.sh"
+        },
+        {
+            "type": "file",
+            "source": "./files/server/airflowserver.conf",
+            "destination": "/etc/supervisor/conf.d/"
+        },
+        {
+            "type": "file",
+            "source": "./files/server/airflowworker.conf",
+            "destination": "/etc/supervisor/conf.d/"
+        }
+    ]
+}
