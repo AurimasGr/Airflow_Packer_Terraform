@@ -20,13 +20,6 @@
     "provisioners": [
         {
             "type": "shell",
-            "inline":[
-                "ls -al /home/ubuntu",
-                "cat /home/ubuntu/welcome.txt"
-            ]
-        },
-        {
-            "type": "shell",
             "script": "./scripts/common/init.sh"
         },
         {

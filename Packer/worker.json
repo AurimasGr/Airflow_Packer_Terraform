@@ -20,13 +20,6 @@
     "provisioners": [
         {
             "type": "shell",
-            "inline":[
-                "ls -al /home/ubuntu",
-                "cat /home/ubuntu/welcome.txt"
-            ]
-        },
-        {
-            "type": "shell",
             "script": "./scripts/common/init.sh"
         },
         {
@@ -41,6 +34,13 @@
             "type": "file",
             "source": "./files/worker/airflowworker.conf",
             "destination": "/etc/supervisor/conf.d/"
+        },
+        {
+            "type": "shell",
+            "inline":[
+                "sudo supervisorctl reread",
+                "sudo supervisorctl update"
+            ]
         }
     ]
 }
