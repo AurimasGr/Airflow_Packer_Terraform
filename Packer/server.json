@@ -31,15 +31,15 @@
         },
         {
             "type": "shell",
+            "script": "./scripts/server/init_airflow.sh"
+        },
+        {
+            "type": "shell",
             "script": "./scripts/server/mysql.sh"
         },
         {
             "type": "shell",
             "script": "./scripts/server/rabbitmq.sh"
-        },
-        {
-            "type": "shell",
-            "script": "./scripts/common/init_airflow.sh"
         },
         {
             "type": "file",

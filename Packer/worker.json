@@ -31,20 +31,15 @@
         },
         {
             "type": "shell",
-            "script": "./scripts/worker/mysql.sh"
+            "script": "./scripts/worker/init_airflow.sh"
         },
         {
             "type": "shell",
-            "script": "./scripts/common/init_airflow.sh"
+            "script": "./scripts/worker/mysql.sh"
         },
         {
             "type": "file",
-            "source": "./files/server/airflowserver.conf",
-            "destination": "/etc/supervisor/conf.d/"
-        },
-        {
-            "type": "file",
-            "source": "./files/server/airflowworker.conf",
+            "source": "./files/worker/airflowworker.conf",
             "destination": "/etc/supervisor/conf.d/"
         }
     ]
