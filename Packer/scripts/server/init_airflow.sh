@@ -8,7 +8,13 @@ sudo mysql -e "GRANT ALL ON ${AIRFLOW_DB}.* TO '${AIRFLOW_USER}'@'localhost' IDE
 sudo mysql -e "GRANT ALL ON ${AIRFLOW_DB}.* TO '${AIRFLOW_USER}'@'%' IDENTIFIED BY '${AIRFLOW_PASSWORD}';"
 sudo mysql -e "FLUSH PRIVILEGES;"
 
+sudo sed -i '/\[mysqld\]/a explicit_defaults_for_timestamp = 1' /etc/mysql/mysql.conf.d/mysqld.cnf
+
+sudo service mysql stop
+sudo service mysql start
+
 sudo pip3 install apache-airflow[mysql,rabbitmq,celery]
+
 airflow initdb
 
 sudo sed -i 's|.*executor =.*|executor = LocalExecutor|' /home/ubuntu/airflow/airflow.cfg
@@ -16,11 +22,6 @@ sudo sed -i 's|.*sql_alchemy_conn =.*|sql_alchemy_conn = mysql://airflow_user:ai
 
 airflow initdb
 
-# Allow external connections
-sudo sed -i "s|.*bind-address.*|bind-address = 0.0.0.0|" /etc/mysql/mysql.conf.d/mysqld.cnf
-sudo sed -i '/bind-address = 0.0.0.0/a explicit_defaults_for_timestamp = 1' /etc/mysql/mysql.conf.d/mysqld.cnf
-
-# Restart mysql to enable new configs
-sudo service mysql stop
-sudo service mysql start
-
+sudo rabbitmqctl add_user ${AIRFLOW_USER} ${AIRFLOW_PASSWORD}
+sudo rabbitmqctl set_user_tags ${AIRFLOW_USER} administrator
+sudo rabbitmqctl set_permissions -p / ${AIRFLOW_USER} ".*" ".*" ".*"

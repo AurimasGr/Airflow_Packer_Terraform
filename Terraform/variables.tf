@@ -1,5 +1,5 @@
 variable "region" {
-  default = "eu-cental-1"
+  default = "eu-central-1"
 }
 
 variable "worker_instance_type" {
@@ -24,5 +24,13 @@ variable "worker_ami" {
 
 variable "aws_key_path" {
   default = ""
+}
+
+variable "mysql_exposure" {
+  type = map
+  default = {
+    "LocalExecutor" = "localhost"
+    "CeleryExecutor" = "0.0.0.0"
+  }
 }
 
