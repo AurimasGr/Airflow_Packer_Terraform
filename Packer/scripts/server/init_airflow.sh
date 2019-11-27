@@ -22,6 +22,8 @@ sudo sed -i 's|.*sql_alchemy_conn =.*|sql_alchemy_conn = mysql://airflow_user:ai
 
 airflow initdb
 
+sudo pip3 install pyamqp
+
 sudo rabbitmqctl add_user ${AIRFLOW_USER} ${AIRFLOW_PASSWORD}
 sudo rabbitmqctl set_user_tags ${AIRFLOW_USER} administrator
 sudo rabbitmqctl set_permissions -p / ${AIRFLOW_USER} ".*" ".*" ".*"
